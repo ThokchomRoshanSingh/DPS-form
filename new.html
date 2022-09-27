@@ -1,0 +1,103 @@
+<style>
+    input {
+           padding: .5rem 1rem;
+    }
+    section {
+        margin: 1rem;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 5fr;
+      align-items: center;
+      position: relative;
+    }
+    
+    
+    :root {
+        --valid: green;
+      --invalid: red;
+    }
+    input {
+        border: 2px solid var(--color, #ccc);
+    }
+    input:focus {
+        outline-offset: 3px;
+      outline: none;
+    }
+    section:has(:valid) {
+        --color: var(--valid);
+    }
+    
+    input:not(:focus):invalid {
+        --color: var(--invalid);
+      animation: shake 200ms;
+    }
+    
+    section:has(#phone:not(:focus):invalid)::after {
+        position: absolute;
+      top: 100%;
+      left: 20%;
+        content: "Please enter 10 digit Phone number";
+      color: red;
+    }
+     section:has(#password:not(:focus):invalid)::after {
+        position: absolute;
+      top: 100%;
+      color: red;
+  
+      left: 20%;
+        content: "Please enter password between 6 to 12 character";
+    }
+    
+    section:has(:placeholder-shown){
+          --color: #ccc;
+    }
+    
+    form:valid button {
+        background: green;
+      color: white;
+      cursor: pointer;
+    }
+   
+    
+    form button {
+        border: none;
+      border-radius: .5rem;
+        margin-left: 1rem;
+      padding: 1rem 2rem;
+      background: grey;
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    
+    
+    
+    
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+      10%, 30%, 50%, 70%, 90% {
+          transform: translateX(4%);
+      }
+      20%, 40%, 60%, 80% {
+          transform: translateX(-4%);
+      }
+      
+  </style>
+  
+  <form>
+    <section>
+      <label for='phone'>
+        Phone
+      </label>
+      <input  type='text' id="phone" placeholder="Enter Phone Number" pattern='^[0-9]{10}$'/>
+    </section>
+    <section>
+      <label for='password'>
+        Password
+      </label>
+      <input  type='password' id="password" placeholder="Enter password" pattern="^[#@a-zA-Z0-9]{6,12}$"/>
+  
+    </section>
+    <button type='submit' >Login</button>
+  </form>
